@@ -21,7 +21,7 @@ void ingresoProductos(char productos[][30],int pantallas[], int chips[],int tarj
     // Pantallas
     do {
         printf("Cantidad de pantallas que usa el producto: ");
-        scanf("%d", &valor);
+        scanf(" %d", &valor);
         if (valor < 0)
             printf("La cantidad no puede ser negativa.\n");
     } while (valor < 0);
@@ -30,7 +30,7 @@ void ingresoProductos(char productos[][30],int pantallas[], int chips[],int tarj
     // Chips
     do {
         printf("Cantidad de chips que usa el producto: ");
-        scanf("%d", &valor);
+        scanf(" %d", &valor);
         if (valor < 0)
             printf("La cantidad no puede ser negativa.\n");
     } while (valor < 0);
@@ -39,7 +39,7 @@ void ingresoProductos(char productos[][30],int pantallas[], int chips[],int tarj
     // Tarjetas
     do {
         printf("Cantidad de tarjetas que usa el producto: ");
-        scanf("%d", &valor);
+        scanf(" %d", &valor);
         if (valor < 0)
             printf("La cantidad no puede ser negativa.\n");
     } while (valor < 0);
@@ -48,7 +48,7 @@ void ingresoProductos(char productos[][30],int pantallas[], int chips[],int tarj
     // Sensores
     do {
         printf("Cantidad de sensores que usa el producto: ");
-        scanf("%d", &valor);
+        scanf(" %d", &valor);
         if (valor < 0)
             printf("La cantidad no puede ser negativa.\n");
     } while (valor < 0);
@@ -57,14 +57,11 @@ void ingresoProductos(char productos[][30],int pantallas[], int chips[],int tarj
     // Tiempo
     do {
         printf("Tiempo de produccion (en minutos) por unidad: ");
-        scanf("%d", &valor);
+        scanf(" %d", &valor);
         if (valor < 0)
             printf("El tiempo no puede ser negativo.\n");
     } while (valor < 0);
     tiempo[indice] = valor;
-
-    // Limpio el buffer después de los scanf
-    while (getchar() != '\n');
 }
 
 void imprimirProductos(char productos[][30],int pantallas[],int chips[],int tarjetas[],int sensores[],int tiempo[],int cont)
@@ -74,7 +71,7 @@ void imprimirProductos(char productos[][30],int pantallas[],int chips[],int tarj
         return;
     }
 
-    printf("\n#\tProducto\t\tPantallas\tChips\t\tTarjetas\t\tsensores\t\tTiempo\n");
+    printf("\n#\tProducto\t\tPantallas\t\tChips\t\tTarjetas\t\tsensores\t\tTiempo\n");
     printf("----------------------------------------------------------------------------------------------------------\n");
     for (int i = 0; i < cont; i++) {
         printf("%d\t%s\t\t%d\t\t%d\t\t%d\t\t%d\t\t%d\n",i,productos[i],pantallas[i], chips[i],tarjetas[i],sensores[i],tiempo[i]);
@@ -86,14 +83,10 @@ int leerIndiceValido(int cont)// venta
     int indice;
     do {
         printf("Ingrese el numero del producto (0 a %d): ", cont - 1);
-        scanf("%d", &indice);
+        scanf(" %d", &indice);
         if (indice < 0 || indice >= cont)
             printf("opcion invalida.\n");
     } while (indice < 0 || indice >= cont);
-
-    // Limpio buffer
-    while (getchar() != '\n');
-
     return indice;
 }
 
@@ -112,7 +105,7 @@ void eliminarProducto(char productos[][30],int pantallas[],int tarjetas[],int ch
     int indice;
     do {
         printf("Indice del producto a eliminar: ");
-        scanf("%d", &indice);
+        scanf(" %d", &indice);
         if (indice < 0 || indice >= *cont)
             printf("indice no válido.\n");
     } while (indice < 0 || indice >= *cont);
