@@ -5,7 +5,7 @@
 int main()
 {
     int opc;
-    int cont = 0; // cantidad de productos registrados
+    int cont = 0; 
 
     char productos[5][30];
     int pantallas[5], chips[5], tarjetas[5], sensores[5], tiempo[5];
@@ -27,8 +27,7 @@ int main()
         printf("7. Salir\n");
         printf(">>> ");
 
-        scanf("%d", &opc);
-        while (getchar() != '\n'); // limpio buffer
+        scanf(" %d", &opc);
 
         switch (opc)
         {
@@ -36,9 +35,27 @@ int main()
             if (cont == 5) {
                 printf("Ya no se pueden ingresar mas productos (maximo 5).\n");
             } else {
-                printf("\n--- Ingreso de producto %d ---\n", cont);
-                ingresoProductos(productos, pantallas, chips, tarjetas, sensores, tiempo, cont);
-                cont++;
+                int seguir = 1;
+
+                do {
+                    printf("\n--- Ingreso de producto %d ---\n", cont);
+                    ingresoProductos(productos, pantallas, chips, tarjetas, sensores, tiempo, cont);
+                    cont++;
+
+                    if (cont == 5) {
+                        printf("Llegaste al máximo de 5 productos.\n");
+                        break;
+                    }
+
+                    printf("Desea ingresar otro producto: 1.Si / 2.No: ");
+                    scanf(" %d", &seguir);
+
+                    if (seguir != 1 && seguir != 2) {
+                        printf("Opción invalida, se asumira 2 (No).\n");
+                        seguir = 2;
+                    }
+
+                } while (seguir == 1 && cont < 5);
             }
             break;
 
@@ -52,7 +69,7 @@ int main()
                 // Pantallas
                 do {
                     printf("Cantidad en stock de pantallas: ");
-                    scanf("%d", &valor);
+                    scanf(" %d", &valor);
                     if (valor < 0)
                         printf("La cantidad no puede ser negativa.\n");
                 } while (valor < 0);
@@ -61,7 +78,7 @@ int main()
                 // Chips
                 do {
                     printf("Cantidad en stock de chips: ");
-                    scanf("%d", &valor);
+                    scanf(" %d", &valor);
                     if (valor < 0)
                         printf("La cantidad no puede ser negativa.\n");
                 } while (valor < 0);
@@ -70,16 +87,15 @@ int main()
                 // Tarjetas
                 do {
                     printf("Cantidad en stock de tarjetas: ");
-                    scanf("%d", &valor);
+                    scanf(" %d", &valor);
                     if (valor < 0)
                         printf("La cantidad no puede ser negativa.\n");
                 } while (valor < 0);
                 stock_tarjetas = valor;
-
-                // USB
+              
                 do {
                     printf("Cantidad en stock de sensores: ");
-                    scanf("%d", &valor);
+                    scanf(" %d", &valor);
                     if (valor < 0)
                         printf("La cantidad no puede ser negativa.\n");
                 } while (valor < 0);
@@ -88,13 +104,12 @@ int main()
                 // Tiempo disponible total
                 do {
                     printf("Tiempo total disponible (en minutos): ");
-                    scanf("%d", &valor);
+                    scanf(" %d", &valor);
                     if (valor < 0)
                         printf("El tiempo no puede ser negativo.\n");
                 } while (valor < 0);
                 tiempo_disponible = valor;
 
-                while (getchar() != '\n');
             }
             break;
 
@@ -126,22 +141,21 @@ int main()
 
                 imprimirProductos(productos, pantallas, chips, tarjetas, sensores, tiempo, cont);
 
-                // DECLARAR VARIABLES ANTES DE USARLAS
                 int indice;
                 do {
                     printf("Ingrese numero del producto (0 a %d): ", cont - 1);
-                    scanf("%d", &indice);
+                    scanf(" %d", &indice);
                     if (indice < 0 || indice >= cont)
                         printf("Indice inválido.\n");
                 } while (indice < 0 || indice >= cont);
 
                 int total;
                 printf("Cuantas unidades desea producir?: ");
-                scanf("%d", &total);
+                scanf(" %d", &total);
 
                 int tiempo_total;
                 printf("Tiempo disponible (minutos): ");
-                scanf("%d", &tiempo_total);
+                scanf(" %d", &tiempo_total);
 
                 printf("\nPantallas: ");
                 calculoRecursos(pantallas, indice, total, stock_pantallas, "pantalla/s");
